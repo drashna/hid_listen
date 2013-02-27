@@ -269,7 +269,9 @@ static void unplug_callback(void *hid, IOReturn ret, void *ref)
 	// automatically.  If not, the run loop needs to be run explicitly
 	// before checking the result of this function.
 	//printf("HID/macos: unplugged callback!\n");
-	((struct rawhid_struct *)hid)->disconnected = 1;
+	if(hid) {
+		((struct rawhid_struct *)hid)->disconnected = 1;
+	}
 }
 
 
@@ -409,8 +411,8 @@ void rawhid_close(rawhid_t *hid)
 
 	if (!hid) return;
 	ref = ((struct rawhid_struct *)hid)->ref;
-	IOHIDDeviceRegisterRemovalCallback(ref, NULL, NULL);
-	IOHIDDeviceClose(ref, kIOHIDOptionsTypeNone);
+	if(ref && !((struct rawhid_struct *)hid)->disconnected) IOHIDDeviceRegisterRemovalCallback(ref, NULL, NULL);
+	if(ref && !((struct rawhid_struct *)hid)->disconnected)	IOHIDDeviceClose(ref, kIOHIDOptionsTypeNone);
 	free(hid);
 }
 
