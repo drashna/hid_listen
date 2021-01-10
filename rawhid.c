@@ -50,7 +50,7 @@
 /**                                                                     **/
 /*************************************************************************/
 
-#if defined(LINUX) || defined(__LINUX__) || #system(linux)
+#if defined(LINUX) || defined(__LINUX__)
 #define OPERATING_SYSTEM linux
 #include <fcntl.h>
 #include <errno.h>
@@ -712,11 +712,3 @@ int rawhid_write(rawhid_t *h, const void *buf, int len, int timeout_ms)
 #ifndef OPERATING_SYSTEM
 #error Unknown operating system
 #endif
-
-
-
-
-
-
-
-

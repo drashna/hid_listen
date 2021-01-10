@@ -15,7 +15,7 @@ else ifeq ($(OS), DARWIN)
 TARGET = $(PROG)
 CC = gcc
 STRIP = strip
-SDK = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+SDK = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk
 CFLAGS = -O2 -Wall -isysroot $(SDK) -D$(OS) -arch x86_64 -arch i386
 LIBS = -Xlinker -syslibroot -Xlinker $(SDK) -framework IOKit -framework CoreFoundation -lncurses
 else ifeq ($(OS), WINDOWS)
@@ -65,4 +65,3 @@ resource.o: resource.rs icons/$(PROG).ico
 clean:
 	rm -f *.o $(PROG) $(PROG).exe $(PROG).exe.bak $(PROG).dmg
 	rm -rf $(PROG).app
-
